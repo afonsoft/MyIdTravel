@@ -24,44 +24,44 @@ namespace MyIdTravelService
          */
 
         private readonly com.myidtravel.UploadService oWSProxy;
-        private readonly Microsoft.Web.Services2.Security.X509.X509Certificate clientCertificate;
-        private readonly Microsoft.Web.Services2.Security.X509.X509Certificate serverCertificate;
+        private readonly Microsoft.Web.Services2.Security.X509.X509Certificate SigningTokenCertificate;
+        private readonly Microsoft.Web.Services2.Security.X509.X509Certificate EncryptTokenCertificate;
 
         /// <summary>
         /// Client for MyIdTravel - Staff Profiles Upload
         /// </summary>
         /// <param name="endPoint">Url for WebService</param>
-        /// <param name="clientCertificate">Certificate for Client pfx</param>
+        /// <param name="signingToken">Certificate for Client pfx</param>
         /// <param name="serverCertificate">Certificate for Server cer</param>
         public MyIdTravelClient(string endPoint,
-            System.Security.Cryptography.X509Certificates.X509Certificate2 clientCertificate,
-            System.Security.Cryptography.X509Certificates.X509Certificate2 serverCertificate)
-            : this(endPoint, new System.Security.Cryptography.X509Certificates.X509Certificate(clientCertificate),
-                  new System.Security.Cryptography.X509Certificates.X509Certificate(serverCertificate))
+            System.Security.Cryptography.X509Certificates.X509Certificate2 signingToken,
+            System.Security.Cryptography.X509Certificates.X509Certificate2 encryptToken)
+            : this(endPoint, new System.Security.Cryptography.X509Certificates.X509Certificate(signingToken),
+                  new System.Security.Cryptography.X509Certificates.X509Certificate(encryptToken))
         { }
 
         /// <summary>
         /// Client for MyIdTravel - Staff Profiles Upload
         /// </summary>
         /// <param name="endPoint">Url for WebService</param>
-        /// <param name="clientCertificateThumbprint">Thumbprint for Client</param>
-        /// <param name="serverCertificateThumbprint">Thumbprint for Server</param>
+        /// <param name="signingTokenThumbprint">Thumbprint for Client pfx</param>
+        /// <param name="encryptTokenThumbprint">Thumbprint for Server cer</param>
         public MyIdTravelClient(string endPoint,
-            string clientCertificateThumbprint,
-            string serverCertificateThumbprint)
-            : this(endPoint, new System.Security.Cryptography.X509Certificates.X509Certificate(X509CertificateByThumbprint(clientCertificateThumbprint)),
-                  new System.Security.Cryptography.X509Certificates.X509Certificate(X509CertificateByThumbprint(serverCertificateThumbprint)))
+            string signingTokenThumbprint,
+            string encryptTokenThumbprint)
+            : this(endPoint, new System.Security.Cryptography.X509Certificates.X509Certificate(X509CertificateByThumbprint(signingTokenThumbprint)),
+                  new System.Security.Cryptography.X509Certificates.X509Certificate(X509CertificateByThumbprint(encryptTokenThumbprint)))
         { }
 
         /// <summary>
         /// Client for MyIdTravel - Staff Profiles Upload
         /// </summary>
         /// <param name="endPoint">Url for WebService</param>
-        /// <param name="clientCertificate">Certificate for Client pfx</param>
-        /// <param name="serverCertificate">Certificate for Server cer</param>
+        /// <param name="signingToken">Certificate for Client pfx</param>
+        /// <param name="encryptToken">Certificate for Server cer</param>
         public MyIdTravelClient(string endPoint,
-            System.Security.Cryptography.X509Certificates.X509Certificate clientCertificate,
-            System.Security.Cryptography.X509Certificates.X509Certificate serverCertificate)
+            System.Security.Cryptography.X509Certificates.X509Certificate signingToken,
+            System.Security.Cryptography.X509Certificates.X509Certificate encryptToken)
         {
 
             oWSProxy = new com.myidtravel.UploadService();
@@ -72,8 +72,8 @@ namespace MyIdTravelService
             oWSProxy.RequestSoapContext.Security.Timestamp.TtlInSeconds = 1800;
             oWSProxy.StaffProfilesUploadCompleted += OWSProxy_StaffProfilesUploadCompleted;
 
-            this.clientCertificate = new Microsoft.Web.Services2.Security.X509.X509Certificate(clientCertificate.Handle);
-            this.serverCertificate = new Microsoft.Web.Services2.Security.X509.X509Certificate(serverCertificate.Handle);
+            this.SigningTokenCertificate = new Microsoft.Web.Services2.Security.X509.X509Certificate(signingToken.Handle);
+            this.EncryptTokenCertificate = new Microsoft.Web.Services2.Security.X509.X509Certificate(encryptToken.Handle);
 
             AddSignature(oWSProxy);
             EncryptMessage(oWSProxy);
@@ -118,7 +118,7 @@ namespace MyIdTravelService
 
         private void AddSignature(WebServicesClientProtocol oWSProxy)
         {
-            SecurityToken signingToken = new X509SecurityToken(this.clientCertificate);
+            SecurityToken signingToken = new X509SecurityToken(this.SigningTokenCertificate);
 
             if (!signingToken.SupportsDigitalSignature)
             {
@@ -137,7 +137,7 @@ namespace MyIdTravelService
 
         private void EncryptMessage(WebServicesClientProtocol oWSProxy)
         {
-            X509SecurityToken encryptToken = new X509SecurityToken(this.serverCertificate);
+            X509SecurityToken encryptToken = new X509SecurityToken(this.EncryptTokenCertificate);
 
             if (!encryptToken.SupportsDataEncryption)
             {
@@ -160,7 +160,7 @@ namespace MyIdTravelService
             if (string.IsNullOrEmpty(Thumbprint))
                 throw new ArgumentNullException("Thumbprint is null or empty", new Exception("Thumbprint is mandatory"));
 
-            Thumbprint = Thumbprint.Replace("\u200e", string.Empty).Replace("\u200f", string.Empty).Replace(" ", string.Empty);
+            Thumbprint = Thumbprint.Replace("\u200e", string.Empty).Replace("\u200f", string.Empty).Replace(" ", string.Empty).Replace(":", string.Empty);
 
             X509CertificateStore store = new X509CertificateStore(X509CertificateStore.StoreProvider.System, X509CertificateStore.StoreLocation.LocalMachine, X509CertificateStore.RootStore);
             store.OpenRead();

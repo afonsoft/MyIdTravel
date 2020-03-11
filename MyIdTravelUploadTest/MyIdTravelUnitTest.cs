@@ -16,9 +16,12 @@ namespace MyIdTravelUploadTest
         {
             Console.WriteLine("Load X509Certificate2");
             string endpoint = "http://myidtravel.com/ws/services/UploadService";
+            
             string pathServer = @"C:\Users\mazza\OneDrive - VRG Linhas Aéreas S A\Documents\MyIdTravel Avianca\svcMyIDTravelUpdate\svcMyIDTravelUpdate\O6.cer";
+            
             string pathClient = @"C:\Users\mazza\OneDrive - VRG Linhas Aéreas S A\Documents\MyIdTravel Avianca\svcMyIDTravelUpdate\svcMyIDTravelUpdate\O6.pfx";
             string pwdClient = "ps4mO6q8vy";
+            
             X509Certificate2 clientCertificate = new X509Certificate2(File.ReadAllBytes(pathClient), pwdClient);
             X509Certificate2 serverCertificate = new X509Certificate2(File.ReadAllBytes(pathServer));
 
