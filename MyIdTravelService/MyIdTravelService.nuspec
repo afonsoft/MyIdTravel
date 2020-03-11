@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>2020.3.11</version>
+    <title>MyIdTravelService</title>
+    <authors>Afonso Dutra Nogueira Filho</authors>
+    <owners>Afonso Dutra Nogueira Filho</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/afonsoft/MyIdTravel</projectUrl>
+    <iconUrl>https://www.myidtravel.com/myidtravel/ui/resources/images/favicon.ico</iconUrl>
+    <description>MyIdTravel Upload Profile Staff</description>
+    <releaseNotes>MyIdTravel Upload Profile Staff.</releaseNotes>
+    <copyright>Afonsoft</copyright>
+    <tags>MyIdTravel Upload Profile Staff Afonsoft</tags>
+    <repository type="git" url="https://github.com/afonsoft/MyIdTravel.git"></repository>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1" >
+        <dependency id="Microsoft.Web.Services2" version="2.0.3.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
