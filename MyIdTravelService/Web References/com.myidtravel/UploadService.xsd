@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://bos.upload.myidtravel.com" elementFormDefault="qualified" targetNamespace="http://bos.upload.myidtravel.com" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>myIdTravel Staff Profiles Upload: Technical
+			Specification Version 1.9.0</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="Contact">
+    <xs:attribute name="email" type="xs:anyURI" use="optional" />
+    <xs:attribute name="phone1" type="xs:string" use="optional" />
+    <xs:attribute name="phone2" type="xs:string" use="optional" />
+  </xs:complexType>
+  <xs:complexType name="PTCAllotment">
+    <xs:attribute name="ptc" type="xs:string" use="required" />
+    <xs:attribute name="counter" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="LockDate">
+    <xs:attribute name="startDate" type="xs:date" use="required" />
+    <xs:attribute name="endDate" type="xs:date" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="Salutation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MR" />
+      <xs:enumeration value="MS" />
+      <xs:enumeration value="CHD" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EntitledPerson">
+    <xs:attribute name="ptc" type="xs:string" use="required" />
+    <xs:attribute name="lastname" type="xs:string" use="required" />
+    <xs:attribute name="middlename" type="xs:string" use="optional" />
+    <xs:attribute name="firstname" type="xs:string" use="required" />
+    <xs:attribute name="salutation" type="Salutation" use="required" />
+    <xs:attribute name="dob" type="xs:date" use="optional" />
+    <xs:attribute name="isChild" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>Set to true if entitled person is a child
+				</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="isStudent" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>Set to true if entitled person is a student
+				</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="taxDependant" type="xs:boolean" use="optional" />
+    <xs:attribute name="extension" type="xs:anySimpleType" use="optional" />
+    <xs:attribute name="startDate" type="xs:date" use="optional" />
+    <xs:attribute name="endDate" type="xs:date" use="optional" />
+    <xs:attribute name="externalPersonID" type="xs:string" />
+    <xs:attribute name="disabled" type="xs:boolean" />
+  </xs:complexType>
+  <xs:simpleType name="LaborGroup">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Pilot" />
+      <xs:enumeration value="Cabin" />
+      <xs:enumeration value="Ground" />
+      <xs:enumeration value="SVP" />
+      <xs:enumeration value="VP" />
+      <xs:enumeration value="EXEC" />
+      <xs:enumeration value="Director" />
+      <xs:enumeration value="FoundingOfficer" />
+      <xs:enumeration value="FoundingDirector" />
+      <xs:enumeration value="Flight" />
+      <xs:enumeration value="Inflight" />
+      <xs:enumeration value="Provisional" />
+      <xs:enumeration value="MGR" />
+      <xs:enumeration value="BOD" />
+      <xs:enumeration value="Retiree" />
+      <xs:enumeration value="Permanent" />
+      <xs:enumeration value="President" />
+      <xs:enumeration value="DIR" />
+      <xs:enumeration value="CAD" />
+      <xs:enumeration value="AMTS" />
+      <xs:enumeration value="PNT" />
+      <xs:enumeration value="PNC" />
+      <xs:enumeration value="EMP" />
+      <xs:enumeration value="MAN" />
+      <xs:enumeration value="OUV" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TravelEligibility">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE" />
+      <xs:enumeration value="ONLINE" />
+      <xs:enumeration value="OFFLINE" />
+      <xs:enumeration value="ONLINE_OFFLINE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SalaryGrade">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Group_1" />
+      <xs:enumeration value="Group_2" />
+      <xs:enumeration value="Group_3" />
+      <xs:enumeration value="Group_4" />
+      <xs:enumeration value="Group_5" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Category">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="B" />
+      <xs:enumeration value="C" />
+      <xs:enumeration value="D" />
+      <xs:enumeration value="E" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="G" />
+      <xs:enumeration value="H" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OpMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="leisure" />
+      <xs:enumeration value="duty" />
+      <xs:enumeration value="choose" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element name="contact" type="Contact" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="lock-date" nillable="true" type="LockDate" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ptc-allotment" nillable="true" type="PTCAllotment" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="entitled-person" nillable="true" type="EntitledPerson" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="employment-status" type="EmploymentStatus" />
+      <xs:element minOccurs="0" maxOccurs="1" name="extensions" type="ExtensionsType" />
+    </xs:sequence>
+    <xs:attribute name="ptc" type="xs:string" use="required" />
+    <xs:attribute name="lastname" type="xs:string" use="required" />
+    <xs:attribute name="middlename" type="xs:string" use="optional" />
+    <xs:attribute name="firstname" type="xs:string" use="required" />
+    <xs:attribute name="salutation" type="Salutation" use="optional" />
+    <xs:attribute name="gender" type="Gender" use="optional" />
+    <xs:attribute name="eID" type="xs:string" use="required" />
+    <xs:attribute name="doj" type="xs:date" use="required" />
+    <xs:attribute name="subCategory" type="Category" use="optional" />
+    <xs:attribute name="subCompany" type="xs:string" use="optional" />
+    <xs:attribute name="department" type="xs:string" use="optional" />
+    <xs:attribute name="dot" type="xs:date" use="optional" />
+    <xs:attribute name="dhc" type="xs:boolean" use="optional" />
+    <xs:attribute name="currency" type="xs:string" use="optional" />
+    <xs:attribute name="countyOfRes" type="xs:string" use="optional" />
+    <xs:attribute name="salaryDeduction" type="xs:boolean" use="optional" />
+    <xs:attribute name="laborGroup" type="LaborGroup" use="optional" />
+    <xs:attribute name="salaryGrade" type="SalaryGrade" use="optional" />
+    <xs:attribute name="dateOfBirth" type="xs:date" use="optional" />
+    <xs:attribute name="costCenter" type="xs:string" use="optional" />
+    <xs:attribute name="managerEmail" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>max. length 200</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="setOfBooks" type="xs:string" use="optional" />
+    <xs:attribute name="dutyServiceClass" type="xs:string" use="optional" />
+    <xs:attribute name="minRequiredMilageZoneDuty" type="xs:int" />
+    <xs:attribute name="leisureServiceClass" type="xs:string" use="optional" />
+    <xs:attribute name="oalTravelEligible" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation>Deprecated: Use eligibilityDuty and/or eligibilityLeisure instead. Defines if the employee is eligible for travelling
+					on other airlines</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="eligibilityDuty" type="TravelEligibility" use="optional">
+      <xs:annotation>
+        <xs:documentation>Defines what types of duty travel bookings the employee may do (interlining/non-interlining)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="eligibilityLeisure" type="TravelEligibility" use="optional">
+      <xs:annotation>
+        <xs:documentation>Defines what types of leisure travel bookings the employee may do (interlining/non-interlining)</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="stationOfWork" type="xs:string" use="optional" />
+    <xs:attribute name="homeFlightEligible" type="xs:boolean" use="optional" />
+    <xs:attribute name="externalPersonID" type="xs:string" />
+    <xs:attribute name="familyStatus" type="xs:string" />
+    <xs:attribute name="employeeBenefitTaxable" type="xs:boolean" />
+    <xs:anyAttribute processContents="lax" />
+  </xs:complexType>
+  <xs:complexType name="DeleteElement">
+    <xs:attribute name="eID" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="UpdateRecord">
+    <xs:sequence>
+      <xs:element name="employee" type="Employee" />
+      <xs:element minOccurs="0" name="MessageList" type="MessageListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteRecord">
+    <xs:sequence>
+      <xs:element name="deleteEmployee" type="DeleteElement" />
+      <xs:element name="MessageList" type="MessageListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UploadProfilesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="deleteRecord" type="DeleteRecord" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="updateRecord" type="UpdateRecord" />
+    </xs:sequence>
+    <xs:attribute name="ac" type="xs:string" use="required" />
+    <xs:attribute name="aID" type="xs:integer" use="required" />
+  </xs:complexType>
+  <xs:simpleType name="EmploymentStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="active" />
+      <xs:enumeration value="absent" />
+      <xs:enumeration value="temporary" />
+      <xs:enumeration value="retired" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ExtensionsType">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EmploymentStatus">
+    <xs:attribute name="startDate" type="xs:date" use="required" />
+    <xs:attribute name="endDate" type="xs:date" />
+    <xs:attribute name="status" type="EmploymentStatusType" use="required" />
+  </xs:complexType>
+  <xs:complexType name="UploadProfilesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="deleteRecord" type="DeleteRecord" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="updateRecord" type="UpdateRecord" />
+      <xs:element minOccurs="0" name="MessageList" type="MessageListType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageListType">
+    <xs:annotation>
+      <xs:documentation>
+				Contains a list of MessageType elements
+			</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="999" name="Message" nillable="true" type="MessageType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="Code" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="MessageCategoryType" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="MessageCategoryType">
+    <xs:annotation>
+      <xs:documentation>
+				The message kind is specified in the following
+				categories
+			</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UNKNOWN" />
+      <xs:enumeration value="NONE" />
+      <xs:enumeration value="ERROR" />
+      <xs:enumeration value="WARNING" />
+      <xs:enumeration value="INFO" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Gender">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="M" />
+      <xs:enumeration value="F" />
+      <xs:enumeration value="U" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

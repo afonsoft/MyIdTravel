@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.upload.myidtravel.lhsystems.com" xmlns:ns2="http://bos.upload.myidtravel.com" name="UploadService" targetNamespace="http://service.upload.myidtravel.lhsystems.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>myIdTravel Staff Profiles Upload: Technical Specification Version 1.9.0</wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://service.upload.myidtravel.lhsystems.com" version="1.0">
+      <xsd:import schemaLocation="UploadService?xsd=myidtravel_upload.xsd" namespace="http://bos.upload.myidtravel.com" />
+      <xsd:element name="StaffProfilesUploadRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="StaffProfilesUploadRequest" type="ns2:UploadProfilesRequest" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="StaffProfilesUploadResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="StaffProfilesUploadResponse" type="ns2:UploadProfilesResponse" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="StaffProfilesUploadRequest">
+    <wsdl:part name="parameters" element="tns:StaffProfilesUploadRequest" />
+  </wsdl:message>
+  <wsdl:message name="StaffProfilesUploadResponse">
+    <wsdl:part name="parameters" element="tns:StaffProfilesUploadResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StaffProfilesUploadType">
+    <wsdl:operation name="StaffProfilesUpload">
+      <wsdl:input message="tns:StaffProfilesUploadRequest" />
+      <wsdl:output message="tns:StaffProfilesUploadResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StaffProfilesUploadSOAP" type="tns:StaffProfilesUploadType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="StaffProfilesUpload">
+      <soap:operation soapAction="urn:StaffProfilesUpload" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UploadService">
+    <wsdl:port name="StaffProfilesUploadSOAP" binding="tns:StaffProfilesUploadSOAP">
+      <soap:address location="http://10.11.16.99:80/s1/ws/services/UploadService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
