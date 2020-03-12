@@ -1,5 +1,5 @@
 # MyIdTravel
-Library for uploading employees on MyIdTravel
+Library for uploading employees on MyIdTravel - Lufthansa
 
 ## Documents
 [myIDTravel TS - StaffProfiles Upload v1.9.0.pdf](https://github.com/afonsoft/MyIdTravel/blob/master/myIDTravel%20TS%20-%20StaffProfiles%20Upload%20v1.9.0.pdf)
