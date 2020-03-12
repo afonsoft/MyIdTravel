@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>2020.3.11</version>
+    <version>2020.3.12</version>
     <title>MyIdTravelService</title>
     <authors>Afonso Dutra Nogueira Filho</authors>
     <owners>Afonso Dutra Nogueira Filho</owners>
@@ -11,9 +11,9 @@
     <projectUrl>https://github.com/afonsoft/MyIdTravel</projectUrl>
     <iconUrl>https://www.myidtravel.com/myidtravel/ui/resources/images/favicon.ico</iconUrl>
     <description>MyIdTravel Upload Profile Staff</description>
-    <releaseNotes>MyIdTravel Upload Profile Staff.</releaseNotes>
+    <releaseNotes>MyIdTravel Upload Profile Staff</releaseNotes>
     <copyright>Afonsoft</copyright>
-    <tags>MyIdTravel Upload Profile Staff Afonsoft</tags>
+    <tags>MyIdTravel Upload Profile Staff Afonsoft Lufthansa</tags>
     <repository type="git" url="https://github.com/afonsoft/MyIdTravel.git"></repository>
     <dependencies>
       <group targetFramework=".NETFramework4.6.1" >
