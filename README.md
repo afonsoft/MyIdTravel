@@ -17,8 +17,8 @@ Working only **Web Reference**, because need **Web Services Enhancements (WSE) 2
 ## URLs
 Environments url
 ### Test
-[http://integration.myidtravel.com/ws/services/UploadService](http://integration.myidtravel.com/ws/services/UploadService?WSDL)  
+[http://integration.myidtravel.com/ws/services/UploadService](http://integration.myidtravel.com/ws/services/UploadService?wsdl)  
 ### pre-production (Staging)
-[http://staging.myidtravel.com/ws/services/UploadService](http://staging.myidtravel.com/ws/services/UploadService?WSDL)  
+[http://staging.myidtravel.com/ws/services/UploadService](http://staging.myidtravel.com/ws/services/UploadService?wsdl)  
 ### Production
-[http://myidtravel.com/ws/services/UploadService](http://myidtravel.com/ws/services/UploadService?WSDL)  
+[http://myidtravel.com/ws/services/UploadService](http://myidtravel.com/ws/services/UploadService?wsdl)  
