@@ -1,5 +1,5 @@
 # MyIdTravel
-Library for uploading employees on MyIdTravel - Lufthansa
+Library for uploading employees on MyIdTravel - Two-Way SSL - Lufthansa
 
 For framework 4.6.1 
 
